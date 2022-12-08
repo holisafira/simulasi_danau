@@ -17,22 +17,23 @@ app = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.BOOTST
 #membaca file
 sheet_inflow = "inflow"
 sheet_outflow = "outflow"
-url_inflow = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTzEHx9j46kH6GAYlbyKRCz5-Cbic2OaX2TMjFY1XI8uWLifG37k-CR80YReu8KsCntEjdvMOMmlkpy/pub?output=csv&sheet={sheet_inflow}"
-url_outflow = url="https://docs.google.com/spreadsheets/d/e/2PACX-1vTzEHx9j46kH6GAYlbyKRCz5-Cbic2OaX2TMjFY1XI8uWLifG37k-CR80YReu8KsCntEjdvMOMmlkpy/pub?output=csv&sheet={sheet_outflow}"
+url_inflow = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRsxRP6lGuCaWHEZ8Ouhgol0e5fLVTXaApbpb646oNyAI_KRmpZWSI14c7_iHZkn6FD_hrw7unb6ZRI/pub?output=csv&sheet={sheet_inflow}"
+url_outflow = url="https://docs.google.com/spreadsheets/d/e/2PACX-1vTUJjwNCRuvaEYhPaXUyKnq47Dh11NuXAKwAnlPYjTPktm68yI3wweTKfZF4nPCofZsiFA6MtC1eUeY/pub?output=csv&sheet={sheet_outflow}"
 df_inflow = pd.read_csv(url_inflow)
 df_outflow = pd.read_csv(url_outflow)
 
 
 #membangun komponen
-header = html.H1("Aplikasi Simulasi Kapasitas Embung", style={'textAlign': 'center'})
-subtitle = html.H2("MK Kapita Selekta Matematika Komputasi (MA4103)", style={'textAlign': 'center'})
+header = html.H1("Aplikasi Simulasi Kapasitas Embung B ITERA", style={'textAlign': 'center', "height":"100 px", "background-color":"lightblue"})
+subtitle = html.H5("Tugas Besar Kapita Selekta Matematika Komputasi (KELOMPOK 3)", style={'textAlign': 'center', "height":"3 px", "background-color":"pink"})
+footer = html.Div([html.H1("Institut Teknologi Sumatera"),html.H5("Jl. Terusan Ryacudu, Way Huwi, Kec. Jati Agung, Kabupaten Lampung Selatan, Lampung 35365"), html.P("Zessica Nainggolan | Christina Jheovani| Ayumi Rima| Alviolita Br.Barus | Yanti Marito| Holi Safira| Jesika Ginting"), html.P("created @ 2022 by|072|")], style={'textAlign': 'center', "height":"3 px", "background-color":"lightblue"})
 inflow_fig = go.FigureWidget()
-inflow_fig.add_scatter(name='Inflow', x=df_inflow['Bulan'], y=df_inflow['Data'])
-inflow_fig.layout.title = 'Inflow'
+inflow_fig.add_scatter(name='Inflow', x=df_inflow['Bulan'], y=df_inflow['Data-masuk'])
+inflow_fig.layout.title = 'Plot Air Yang Masuk'
 
 outflow_fig = go.FigureWidget()
-outflow_fig.add_scatter(name='Outflow', x=df_outflow['Bulan'], y=df_outflow['Data'])
-outflow_fig.layout.title = 'Outflow'
+outflow_fig.add_scatter(name='Outflow', x=df_outflow['Bulan'], y=df_outflow['Data-keluar'])
+outflow_fig.layout.title = 'Plot Air Yang Keluar'
 
 simulation_fig = go.FigureWidget()
 # simulation_fig.add_scatter(name='Outflow', x=df_outflow['Bulan'], y=df_outflow['Data'])
@@ -76,10 +77,10 @@ def graph_update(n_clicks):
     # filtering based on the slide and dropdown selection
     if n_clicks >=1:
         #program numerik ---start----
-        inout = df_inflow["Data"].values - df_outflow["Data"].values
+        inout = df_inflow["Data-masuk"].values - df_outflow["Data-keluar"].values
         N = len(inout)
-        u = np.zeros(N)
-        u0 = 4000
+        u = np.zeros
+        u0 = 1000
         u[0] = u0
         dt = 1
 
@@ -105,5 +106,5 @@ def graph_update(n_clicks):
 
 
 #jalankan aplikasi
-if __name__ == '__main__':
+if __name__ == 'main':
     app.run_server()
