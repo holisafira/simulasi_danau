@@ -36,11 +36,11 @@ footer = html.Div([html.H1("Institut Teknologi Sumatera"),html.H5("Jl. Terusan R
 
 chart_masuk= go.FigureWidget()
 chart_masuk.add_bar(name="Chart Inflow", x=df_masuk['Bulan'], y=df_masuk['Data-masuk'] )
-chart_masuk.layout.title = 'Chart Inflow Embung F'
+chart_masuk.layout.title = 'Chart Inflow Embung B'
 
 chart_keluar = go.FigureWidget()
 chart_keluar.add_scatter(name="Outflow " , x=df_keluar['Bulan'], y=df_keluar['Data-keluar'])
-chart_keluar.layout.title = 'Chart Outflow Embung F'
+chart_keluar.layout.title = 'Chart Outflow Embung B'
 
 simulation_fig = go.FigureWidget()
 simulation_fig.layout.title = 'Simulation'
@@ -109,7 +109,7 @@ def graph_update(n_clicks):
         return simulation_fig
     else:
         simulation_fig = go.FigureWidget()
-        simulation_fig.layout.title = 'Simulasi Kapasitas Embung E ITERA '
+        simulation_fig.layout.title = 'Simulasi Kapasitas Embung B ITERA '
 
         return simulation_fig
 
